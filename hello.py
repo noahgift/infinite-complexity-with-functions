@@ -1,5 +1,4 @@
-# var=
-
+import click
 
 def one(x):
     """input is variable, unit is work is x+1, result is return"""
@@ -17,16 +16,19 @@ def three(xxx):
 
     return xxx + 3
 
-
-def main(myinput=1):
-    x = one(myinput)
+@click.command()
+@click.option("--myinput")
+def main(myinput):
+    from_click = int(myinput)
+    x = one(from_click)
     print(x)
     xx = two(x)
     print(xx)
     xxx = three(xx)
-    print(xxx)
+    click.echo(click.style(f"Click CLI returns {xxx}", fg='green'))
     return xxx
 
 
 if __name__ == "__main__":
+    # pylint: disable=no-value-for-parameter
     main()
